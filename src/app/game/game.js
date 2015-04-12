@@ -1,9 +1,11 @@
-angular.module('app.game',[
-
+angular.module('app.game', [
+  'app.config',
+  'app.game.board',
+  'app.game.datasource'
 ])
 
-.config(function config( $stateProvider ) {
-  $stateProvider.state( 'game', {
+.config(function config($stateProvider) {
+  $stateProvider.state('game', {
     url: '/game',
     views: {
       "main": { //nombre de la ui-view del html, donde se reemplaza el controlador y template
@@ -11,15 +13,34 @@ angular.module('app.game',[
         templateUrl: 'game/game.tpl.html'
       }
     },
-    data:{ pageTitle: 'Game' } //datos adicionales  --state.data.pageTitle
+    data: {
+      pageTitle: 'Game'
+    } //datos adicionales  --state.data.pageTitle
   });
 })
 
-.controller('gameController', function () {
+.controller('GameController', function(gameService) {
 
-    var m = this;
+  var m = this;
 
-    m.greeting = "hello World!";
+  m.gameOver = true;
+  m.board = [];
+
+  m.greeting = "hello World!";
+
+  m.newGame = newGame;
+  m.endGame = endGame;
 
 
-})
+  function newGame() {
+    gameService.startNewGame().then(function (board) {
+      m.board = board;
+      m.gameOver = gameService.isGameOver();
+    });
+  }
+
+  function endGame() {
+    m.gameOver = true;
+  }
+
+});

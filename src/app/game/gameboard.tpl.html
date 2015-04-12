@@ -1,0 +1,25 @@
+<div class="gameboard-container">
+  <h1>This is the gameBoard</h1>
+
+  <div ng-if="!board.length">
+    Start a game
+  </div>
+
+  <div ng-if="board.length">
+    <table class="table">
+      <thead>
+        <tr>
+          <th ng-repeat="row in board[0] track by $index">{{$index}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in board track by $index">
+          <td ng-repeat="col in row track by $index" class="board-cell">
+            {{col}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,4 +1,20 @@
 <div class="game-container">
-  <p>{{game.greeting}}
+  <p>{{game.greeting}}</p>
 
+
+  <div class="row">
+    <div class="col-sm-4">
+      <a href ng-show="game.gameOver" ng-click="game.newGame()" class="btn btn-default" >
+        Play New Game!
+      </a>
+      <a href ng-show="!game.gameOver" ng-click="game.endGame()" class="btn btn-danger" >
+        End Game
+      </a>
+    </div>
+    <div class="col-sm-8">
+    </div>
+  </div>
+<div class="row">
+  <lb-gameboard board='game.board'></lb-gameboard>
+</div>
 </div>
